@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">Alcancia1.2</string>
+    <string name="titulo_app">Ahorros Aylen Tejas</string>
+    <string name="pulsar_para_ir">Pulsa para continuar</string>
+    <string name="ajustes">Ajustes</string>
+    <string name="menu_principal">Inicio</string>
+    <string name="ahorros">Ahorros</string>
+    <string name="estadisticas">Estadisticas</string>
+    <string name="metas">Metas</string>
+
+
+    <!-- Textos dentro de Menu Principal / home / inicio -->
+    <string name="txt_home1">¡Bienvenido a tu aplicación de Ahorro!</string>
+    <string name="txt_home2">¡Sacale provecho a esta aplicación y tu bolsillo lo agradecerá!</string>
+
+
+    <!-- Textos dentro de Ahorros -->
+    <string name="txt_ahorros_main_1">¡Felicidades!</string>
+    <string name="txt_ahorros_main_2">Este es el dinero que llevas ahorrado hasta la fecha</string>
+
+
+    <!-- Textos dentro de Metas -->
+    <string name="txt_meta_1">Propósito</string>
+    <string name="txt_meta_2">Costo Total</string>
+    <string name="txt_meta_3">¿Notificar al finalizar su Meta?</string>
+    <!--Botones dentro de Metas -->
+    <string name="btn_ver_metas">VER METAS</string>
+
+    
+    <!-- Spinner Estadisticas -->
+    <string-array name="select_stat">
+        <item>Ingresos</item>
+        <item>Ingresos semanales</item>
+        <item>Ingresos mensuales</item>
+
+    </string-array>
+
+    
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
