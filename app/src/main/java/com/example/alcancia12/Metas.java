@@ -1,5 +1,6 @@
 package com.example.alcancia12;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,10 +9,13 @@ import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -52,13 +56,37 @@ public class Metas extends Fragment {
     Meta metaSeleccionada;
     FirebaseDatabase database;
     DatabaseReference databaseReference;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_metas, container, false);
+
+
+        requireActivity().addMenuProvider(new MenuProvider() {
+            @Override
+            public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+                menuInflater.inflate(R.menu.menu_metas, menu);
+            }
+
+            @Override
+            public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+
+                String proposito = inputProposito.getText().toString();
+                String costo = inputCosto.getText().toString();
+                switch(menuItem.getItemId()){
+                    case R.id.agregar:
+                        insertar();
+                        break;
+                }
+
+                return onMenuItemSelected(menuItem);
+            }
+        });
+
         return view;
+
+
     }
 
     @Override
@@ -130,10 +158,16 @@ public class Metas extends Fragment {
         });
     }
 
+    public void insertar(){
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getContext());
+        View mView = getLayoutInflater().inflate(R.layout.metaspopup, null);
+        Button btnInsertar = (Button) mView.findViewById(R.id.btnInsertar);
+        final EditText mInputProposito = (EditText) mView.findViewById(R.id.inputProposito);
+        final EditText mInputCosto = (EditText) mView.findViewById(R.id.inputCosto);
+        mBuilder.setView(mView);
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
 
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-        inflater.inflate(R.menu.menu_metas, menu);
-        super.onCreateOptionsMenu(menu,inflater);
     }
 
 }
