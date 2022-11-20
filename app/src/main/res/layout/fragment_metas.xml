@@ -1,87 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Metas" >
+    tools:context=".Metas">
 
     <TextView
         android:id="@+id/textView8"
         android:layout_width="116dp"
-        android:layout_height="44dp"
-        android:layout_alignTop="@+id/etProposito"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="-60dp"
-        android:layout_marginEnd="146dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginBottom="46dp"
         android:text="@string/txt_meta_1"
         android:textAlignment="center"
-        android:textSize="22sp" />
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/etProposito"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etProposito"
         android:layout_width="218dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="97dp"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="95dp"
+        android:layout_marginBottom="51dp"
         android:hint="Proposito"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <EditText
         android:id="@+id/etCosto"
-        android:layout_width="wrap_content"
+        android:layout_width="218dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etProposito"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="94dp"
-        android:layout_marginTop="81dp"
-        android:layout_marginEnd="93dp"
+        android:layout_marginBottom="79dp"
         android:hint="Costo"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSave"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <Button
         android:id="@+id/buttonSave"
         android:layout_width="122dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etCosto"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="145dp"
-        android:layout_marginTop="37dp"
-        android:layout_marginEnd="144dp"
+        android:layout_marginBottom="37dp"
         android:text="Guardar"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_ver_metas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etCosto" />
 
     <Button
         android:id="@+id/btn_ver_metas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etCosto"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="106dp"
-        android:layout_marginEnd="148dp"
-        android:text="VER METAS" />
+        android:layout_marginBottom="131dp"
+        android:text="VER METAS"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/buttonSave"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSave" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="116dp"
-        android:layout_height="44dp"
-        android:layout_alignTop="@+id/etProposito"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="149dp"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="145dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="41dp"
         android:text="@string/txt_meta_2"
         android:textAlignment="center"
-        android:textSize="22sp" />
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/etCosto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etProposito" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

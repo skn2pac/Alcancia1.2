@@ -10,12 +10,15 @@ import androidx.fragment.app.FragmentResultListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 
 public class IntoMetas extends Fragment {
 
     TextView tvProposito, tvCosto;
+
 
     public IntoMetas() {
         // Required empty public constructor
@@ -47,7 +50,7 @@ public class IntoMetas extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        tvProposito = view.findViewById(R.id.proposito);
-        tvCosto = view.findViewById(R.id.costo);
+        tvProposito = view.findViewById(R.id.etProposito);
+        tvCosto = view.findViewById(R.id.etCosto);
     }
 }

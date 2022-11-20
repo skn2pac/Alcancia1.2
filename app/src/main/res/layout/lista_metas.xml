@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_margin="15dp"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvProposito"
+        android:textStyle="bold"
+        android:text="Proposito:"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/proposito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="-284dp"
+        android:textStyle="italic"
+        android:layout_toRightOf="@id/tvProposito"
+        android:paddingLeft="5dp"
+        android:text='"Vehículo"'
+        android:textSize="20sp" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvCosto"
+        android:layout_below="@id/tvProposito"
+        android:textStyle="bold"
+        android:text="Costo:"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/costo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/proposito"
+        android:layout_marginLeft="-321dp"
+        android:layout_marginTop="0dp"
+        android:layout_toRightOf="@id/tvCosto"
+        android:paddingLeft="5dp"
+        android:text='"2.000.000"'
+        android:textSize="20sp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvFechaRegistro"
+        android:layout_below="@id/tvCosto"
+        android:textStyle="bold"
+        android:text="Fecha de Registro:"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/fechaRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/costo"
+        android:layout_marginLeft="-211dp"
+        android:layout_marginTop="0dp"
+        android:layout_toRightOf="@id/tvFechaRegistro"
+        android:paddingLeft="5dp"
+        android:text='"19/11/2022 22:42"'
+        android:textSize="20sp"
+        android:textStyle="italic" />
+</RelativeLayout>
