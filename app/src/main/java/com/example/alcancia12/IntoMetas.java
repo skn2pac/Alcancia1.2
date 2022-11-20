@@ -50,7 +50,7 @@ public class IntoMetas extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        tvProposito = view.findViewById(R.id.etProposito);
-        tvCosto = view.findViewById(R.id.etCosto);
+        //tvProposito = view.findViewById(R.id.etProposito);         POSIBLE CAMBIO
+        //tvCosto = view.findViewById(R.id.etCosto);
     }
 }
