@@ -12,7 +12,6 @@
         android:orientation="vertical"
         android:background="@color/primaryLightColor"
         android:layout_margin="10dp"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -35,17 +34,17 @@
             android:layout_height="wrap_content"/>
 
         <Button
-            android:id="@+id/btnCancelar"
-            android:text="Cancelar"
+            android:id="@+id/btn_add"
+            android:text="Insertar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/lvMetas"
-        android:layout_margin="15dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewMeta"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"/>
 
 </LinearLayout>

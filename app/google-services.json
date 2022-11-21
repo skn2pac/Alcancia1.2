@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "849438241914",
+    "project_id": "alcancia-66ebb",
+    "storage_bucket": "alcancia-66ebb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849438241914:android:036f83b1f368b0bb82b7c3",
+        "android_client_info": {
+          "package_name": "com.example.alcancia12"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849438241914-7jrlpljh26ng831lkeqbflitrrlf4l56.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS_lr_jCoe1fTmLs86oAn_CJFILCOtGaM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849438241914-7jrlpljh26ng831lkeqbflitrrlf4l56.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
