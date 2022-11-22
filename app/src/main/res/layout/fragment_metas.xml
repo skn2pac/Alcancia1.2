@@ -7,17 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".Metas">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewMeta"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:layout_weight="1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_ver_metas" />
-
     <EditText
         android:id="@+id/inputCosto"
         android:layout_width="0dp"

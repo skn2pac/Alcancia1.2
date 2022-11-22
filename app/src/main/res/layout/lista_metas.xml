@@ -59,18 +59,28 @@
                     android:textSize="20sp"
                     android:textStyle="italic" />
 
-            </LinearLayout>
+                <ImageView
+                    android:id="@+id/img_editar"
+                    android:layout_width="127dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginLeft="-240dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_baseline_edit_24" />
 
-            <ImageView
-                android:id="@+id/img_eliminar"
-                android:layout_marginTop="25dp"
-                android:layout_width="127dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/eliminar" />
+                <ImageView
+                    android:id="@+id/img_eliminar"
+                    android:layout_width="127dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/eliminar" />
+
+            </LinearLayout>
 
 
         </LinearLayout>
+
 
     </LinearLayout>
 

@@ -56,9 +56,10 @@ public class IntoMetas extends Fragment {
         FirestoreRecyclerOptions<Meta> options =
                 new FirestoreRecyclerOptions.Builder<Meta>().setQuery(FirebaseFirestore.getInstance().collection("Meta"), Meta.class).build();
 
-        metaAdapter = new MetaAdapter(options,this.getActivity());
+        metaAdapter = new MetaAdapter(options,this.getActivity(), getActivity().getSupportFragmentManager());
 /*        metaAdapter.notifyDataSetChanged();*/
         mRecycler.setAdapter(metaAdapter);
+
 
 
 /*        back.setOnClickListener(new View.OnClickListener() {
