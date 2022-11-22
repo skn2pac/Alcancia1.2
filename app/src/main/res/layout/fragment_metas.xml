@@ -1,50 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout3"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".Metas">
-
-    <LinearLayout
-        android:id="@+id/linearLayoutEditar"
-        android:orientation="vertical"
-        android:background="@color/primaryLightColor"
-        android:layout_margin="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/inputProposito"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:hint="Proposito"
-            android:paddingTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <EditText
-            android:id="@+id/inputCosto"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:hint="Costo"
-            android:paddingTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:id="@+id/btn_add"
-            android:text="Insertar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewMeta"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_ver_metas" />
 
-</LinearLayout>
+    <EditText
+        android:id="@+id/inputCosto"
+        android:layout_width="0dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="54dp"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="15dp"
+        android:hint="Costo"
+        android:inputType="text"
+        android:paddingTop="10dp"
+        android:textColor="@color/primaryTextColor"
+        android:textColorHint="#7A7A7A"
+        app:layout_constraintBottom_toTopOf="@+id/btn_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <EditText
+        android:id="@+id/inputProposito"
+        android:layout_width="332dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="21dp"
+        android:hint="Proposito"
+        android:inputType="text"
+        android:paddingTop="10dp"
+        android:textColor="@color/primaryTextColor"
+        android:textColorHint="#7A7A7A"
+        app:layout_constraintBottom_toTopOf="@+id/textView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="209dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="28dp"
+        android:text="Insertar"
+        app:layout_constraintBottom_toTopOf="@+id/btn_ver_metas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputCosto"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="156dp"
+        android:layout_marginBottom="18dp"
+        android:text="TextView"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputProposito"
+        app:layout_constraintEnd_toEndOf="@+id/inputProposito"
+        app:layout_constraintStart_toStartOf="@+id/inputProposito"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Propósito" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="22dp"
+        android:text="TextView"
+        android:textColor="@color/primaryTextColor"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/inputCosto"
+        app:layout_constraintEnd_toEndOf="@+id/inputProposito"
+        app:layout_constraintStart_toStartOf="@+id/inputProposito"
+        app:layout_constraintTop_toBottomOf="@+id/inputProposito"
+        tools:text="Costo" />
+
+    <Button
+        android:id="@+id/btn_ver_metas"
+        android:layout_width="209dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="231dp"
+        android:text="ver metas"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_add" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

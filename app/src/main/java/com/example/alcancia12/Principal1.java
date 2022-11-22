@@ -3,12 +3,10 @@ package com.example.alcancia12;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,8 +31,8 @@ public class Principal1 extends AppCompatActivity {
 
 
         //Tolbar
-        Toolbar tb = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(tb);
+//        Toolbar tb = (Toolbar) findViewById(R.id.tbIntoMetas);      POSIBLE CAMBIO
+//        setSupportActionBar(tb);
 
         //tablayout
         TabLayout tl = (TabLayout) findViewById(R.id.tablayout);
@@ -48,7 +46,7 @@ public class Principal1 extends AppCompatActivity {
                         //Llamar al fragmento inicio
                         MenuPrincipal mp = new MenuPrincipal();
                         getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,mp).commit();
-                        getSupportActionBar().setTitle(R.string.menu_principal);
+                        //getSupportActionBar().setTitle(R.string.menu_principal);
                         break;
                     case 1:
                         //Llamar al fragmento ahorros
@@ -98,19 +96,19 @@ public class Principal1 extends AppCompatActivity {
 
 
 
-    // DESCOMENTAR CUANDO SE ARREGLE EL TOOLBAR
-    //     @Override
-    //    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-    //        int id = item.getItemId(); //recuperar el id de la opcion seleccionada
-    //
-    //        if(id==R.id.op2){
-    //            Toast.makeText(this, "Vas a los ajustes", Toast.LENGTH_SHORT).show();
-    //        }
-    //
-    //
-    //
-    //        return super.onOptionsItemSelected(item);
-    //    }
+
+         @Override
+        public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+            int id = item.getItemId(); //recuperar el id de la opcion seleccionada
+
+            if(id==R.id.op2){
+                Toast.makeText(this, "Vas a los ajustes", Toast.LENGTH_SHORT).show();
+            }
+
+
+
+            return super.onOptionsItemSelected(item);
+        }
 
 
 
