@@ -46,7 +46,7 @@ public class Metas extends DialogFragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_metas, container, false);
 
-        String id = getActivity().getIntent().getStringExtra("id");      // posible cambio GET ACTIVITY
+        String id = getActivity().getIntent().getStringExtra("id");
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
