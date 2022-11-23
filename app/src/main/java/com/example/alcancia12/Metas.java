@@ -5,11 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,18 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
-import com.example.alcancia12.adapter.MetaAdapter;
-import com.example.alcancia12.model.Meta;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,9 +29,7 @@ public class Metas extends DialogFragment {
 
     Button btn_add,btn_ver_metas;
     EditText proposito, costo;
-    RecyclerView mRecycler;
-    MetaAdapter metaAdapter;
-    FirebaseFirestore mfirestore;
+    FirebaseFirestore firebaseFirestore;
     String id_meta;
 
     @Override
@@ -59,25 +48,15 @@ public class Metas extends DialogFragment {
 
         String id = getActivity().getIntent().getStringExtra("id");      // posible cambio GET ACTIVITY
 
-        mfirestore = FirebaseFirestore.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         btn_ver_metas = v.findViewById(R.id.btn_ver_metas);
         costo = v.findViewById(R.id.inputCosto);
         proposito = v.findViewById(R.id.inputProposito);
         btn_add = v.findViewById(R.id.btn_add);
-/*        mRecycler = v.findViewById(R.id.recyclerViewMeta);
-        mRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
-        Query query = mfirestore.collection("Meta");*/
 
-       /* FirestoreRecyclerOptions<Meta> firestoreRecyclerOptions =
-                new FirestoreRecyclerOptions.Builder<Meta>().setQuery(query, Meta.class).build();
-
-        metaAdapter = new MetaAdapter(firestoreRecyclerOptions);
-        metaAdapter.notifyDataSetChanged();
-        mRecycler.setAdapter(metaAdapter);*/
-
-        // aca empieza el cambio min 3:33 video   ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ------------------------------------------------------
-
+        // Si el id del documento es nulo o esta vacio, saltara un aviso para ingresar los datos, en caso contrario este insertara los datos a la base de datos
+        // esta funcion se activa en un listener del boton add
 
         if(id_meta==null || id_meta==""){
             btn_add.setOnClickListener(new View.OnClickListener() {
@@ -85,14 +64,15 @@ public class Metas extends DialogFragment {
                 public void onClick(View view) {
                     String prop = proposito.getText().toString().trim();
                     String cos = costo.getText().toString().trim();
-
+                    long tiempo = getCurrentDateInMilliseconds();
                     if(prop.isEmpty() && cos.isEmpty()){
                         Toast.makeText(getContext(), "Ingresa los datos!!", Toast.LENGTH_SHORT).show();
                     }else{
-                        insertarMeta(prop,cos);
+                        insertarMeta(prop,cos,tiempo);
                     }
                 }
             });
+            // En caso contrario colocamos el actualizar que es llamado al utilizar el boton tipo imagen en el fragmento intometas
         }else{
             btn_add.setText("Actualizar");
             getMeta(id_meta);
@@ -111,74 +91,7 @@ public class Metas extends DialogFragment {
             });
         }
 
-/*        if(id_meta == null || id_meta == ""){
-            btn_add.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String prop = proposito.getText().toString().trim();
-                    String cos =  costo.getText().toString().trim();
-
-                    if(prop.isEmpty() && cos.isEmpty()){
-                        Toast.makeText(getContext(), "Ingrese los datos!", Toast.LENGTH_SHORT).show();
-                    }else{
-                        insertarMeta(prop,cos);
-                    }
-
-                }
-            });
-        }else{
-            btn_add.setText("Actualizar");
-            getMeta(id_meta);
-            btn_add.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View view) {
-                    String prop = proposito.getText().toString().trim();
-                    String cos =  costo.getText().toString().trim();
-
-                    if(prop.isEmpty() && cos.isEmpty()){
-                        Toast.makeText(getContext(), "Ingrese los datos!", Toast.LENGTH_SHORT).show();
-                    }else{
-                        updateMeta(prop,cos,id);
-                    }
-                }
-            });
-        }
-
-        if (id == null || id == ""){
-            btn_add.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String prop = proposito.getText().toString().trim();
-                    String cos =  costo.getText().toString().trim();
-
-                    if(prop.isEmpty() && cos.isEmpty()){
-                        Toast.makeText(getContext(), "Ingrese los datos!", Toast.LENGTH_SHORT).show();
-                    }else{
-                        insertarMeta(prop,cos);
-                    }
-                }
-            });
-        }else{
-            btn_add.setText("Actualizar");
-            getMeta(id);
-            btn_add.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String prop = proposito.getText().toString().trim();
-                    String cos =  costo.getText().toString().trim();
-
-                    if(prop.isEmpty() && cos.isEmpty()){
-                        Toast.makeText(getContext(), "Ingrese los datos!", Toast.LENGTH_SHORT).show();
-                    }else{
-                        updateMeta(prop,cos,id);
-                    }
-
-                }
-            });
-        }*/
-
-
+        // Llamamos al fragmento IntoMetas con el boton ver metas dentro del fragmento Metas
         btn_ver_metas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -190,12 +103,16 @@ public class Metas extends DialogFragment {
         return v;
     }
 
+    //Creamos la funcion updateMeta para mapear los valores de la base de datos
     private void updateMeta(String prop, String cos) {
         Map<String, Object> map = new HashMap<>();
         map.put("proposito", prop);
         map.put("costo", cos);
 
-        mfirestore.collection("Meta").document(id_meta).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+        // Buscamos en la coleccion "Meta" el "id_meta" el cual contiene los datos que se van a actualizar
+        // Si al actualizar los datos estos cambian en la base de datos, con un toast le diremos al usuario que fue Actualizado exitosamente
+        // En caso contrario, con un Toast le daremos a conocer que tuvo un error al actualizar y no se actualizaran los datos.
+        firebaseFirestore.collection("Meta").document(id_meta).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(getContext(), "Updateado Exitosamente", Toast.LENGTH_SHORT).show();
@@ -209,8 +126,11 @@ public class Metas extends DialogFragment {
         });
     }
 
+
+    // Hacemos uso de los get creados en el model Meta, para recuperar los datos y pasarlos como funcion al boton actualizar
+    // Con esto llenamos los campos en el fragmento que se abrira para actualizarl los datos si es solicitado
     private void getMeta(String id_meta){
-        mfirestore.collection("Meta").document(id_meta).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        firebaseFirestore.collection("Meta").document(id_meta).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 String propositoMeta = documentSnapshot.getString("proposito");
@@ -228,16 +148,16 @@ public class Metas extends DialogFragment {
         });
     }
 
-    private void insertarMeta(String prop, String cos){
+    private void insertarMeta(String prop, String cos,Long tiempo){
         Map<String, Object> map = new HashMap<>();
         map.put("proposito", prop);
         map.put("costo", cos);
+        map.put("tiempo",tiempo);
 
-        mfirestore.collection("Meta").add(map).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        firebaseFirestore.collection("Meta").add(map).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Toast.makeText(getContext(), "Insertado Exitosamente", Toast.LENGTH_SHORT).show();
-               //getDialog().dismiss();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -247,35 +167,16 @@ public class Metas extends DialogFragment {
         });
     }
 
+    // Tomamos el tiempo para incorporarlo en el insert y quede registro del tiempo en la base de datos
+    private long getCurrentDateInMilliseconds() { return Calendar.getInstance().getTimeInMillis();}
 
-/*    @Override
-    public void onStart() {
-        super.onStart();
-        metaAdapter.startListening();
+    // Es para dar formato a los milisegundos en tiempo facil de leer para el usuario
+    private String[] longIntoString(long milliseconds){
+        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+        return new String[]{dateFormat.format(milliseconds),timeFormat.format(milliseconds)};
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        metaAdapter.stopListening();
-    }*/
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-
-
-/*        btn_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString("proposito",etProposito.getText().toString().trim());
-                bundle.putString("costo",etCosto.getText().toString().trim());
-                getParentFragmentManager().setFragmentResult("key",bundle);
-            }
-        });*/
-    }
 
 
 }

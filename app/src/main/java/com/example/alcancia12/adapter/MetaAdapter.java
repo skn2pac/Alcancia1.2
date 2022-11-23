@@ -28,7 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MetaAdapter extends FirestoreRecyclerAdapter<Meta, MetaAdapter.ViewHolder> {
 
-    private FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
+    private FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
     FragmentManager fm;
     Activity activity;
 
@@ -46,20 +46,18 @@ public class MetaAdapter extends FirestoreRecyclerAdapter<Meta, MetaAdapter.View
 
     @Override
     protected void onBindViewHolder(@NonNull ViewHolder holder, int i, @NonNull Meta meta) {
-        DocumentSnapshot documentSnapshot = getSnapshots().getSnapshot(holder.getAbsoluteAdapterPosition());  // Posible cambio en getAbsoluteAdapterPosition / 'getAdapterPosition()' is deprecated
+        DocumentSnapshot documentSnapshot = getSnapshots().getSnapshot(holder.getAbsoluteAdapterPosition());
         final String id = documentSnapshot.getId();
 
         holder.proposito.setText(meta.getProposito());
         holder.costo.setText(meta.getCosto());
 
+
         //onclick img para editar
         holder.img_edit.setOnClickListener(new View.OnClickListener() {
             @Override
+            //Abrimos el fragmento Metas desde el boton editar
             public void onClick(View view) {
-/*                Intent i = new Intent(activity, Metas.class);
-                i.putExtra("id_meta",id);
-                activity.startActivity(i);*/
-
                 Metas metas = new Metas();
                 Bundle bundle = new Bundle();
                 bundle.putString("id_meta",id);
@@ -79,11 +77,13 @@ public class MetaAdapter extends FirestoreRecyclerAdapter<Meta, MetaAdapter.View
     }
 
     private void borrarMeta(String id) {
-        mFirestore.collection("Meta").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+        //En caso de que la eliminacion sea correcta eliminamos el dato de la base de datos y alertamos con un Toast exitoso
+        firebaseFirestore.collection("Meta").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(activity, "Deleteado ", Toast.LENGTH_SHORT).show();
             }
+            //En caso de que falle al eliminar un campo dara error con un toast
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
